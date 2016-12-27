@@ -134,6 +134,71 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/mtk_omx_core.cfg:system/etc/mtk_omx_core.cfg \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
 
+# Charger and USB
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.usb.vid=2970
+
+# Permissions
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    $(LOCAL_PATH)/configs/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+
+# Media
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+
+# Thermal
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/thermal.conf:system/etc/.tp/thermal.conf \
+    $(LOCAL_PATH)/configs/thermal.off.conf:system/etc/.tp/thermal.off.conf \
+    $(LOCAL_PATH)/configs/ht120.mtc:system/etc/.tp/.htc120.mtc
+
+# Screen density
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
+
+# This one is set by init
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST := ro.product.model
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
+
+# GPS
+PRODUCT_PACKAGES += \
+    YGPS
+
+# Telephony
+SIM_COUNT := 2
+PRODUCT_PROPERTY_OVERRIDES += ro.telephony.sim.count=$(SIM_COUNT)
+PRODUCT_PROPERTY_OVERRIDES += persist.radio.default.sim=0
+PRODUCT_PROPERTY_OVERRIDES += persist.radio.multisim.config=dsds
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/ecc_list.xml:system/etc/ecc_list.xml
+
+# Graphics
+MTK_GPU_VERSION := mali midgard r7p0
+
+# IO Scheduler
+PRODUCT_PROPERTY_OVERRIDES += \
+    sys.io.scheduler=bfq
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapmaxfree=8m \
+    dalvik.vm.heapstartsize=8m \
+    dalvik.vm.heaptargetutilization=0.75
+
+# Versioning
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.mediatek.version.release=$(MTK_BUILD_VERNO) \
+    ro.mediatek.chip_ver=$(MTK_CHIP_VER)
+
 # Build proprietary bits when available
 ifneq ($(MTKPATH),)
 $(call inherit-product-if-exists, $(MTKPATH)/config/mt6735.mk)
