@@ -34,19 +34,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
 
-# Root
-PRODUCT_PACKAGES += \
-    fstab.mt6735 \
-    init.mt6735.rc \
-    init.mt6735.modem.rc \
-    init.mt6735.usb.rc \
-    meta_init.rc \
-    meta_init.modem.rc \
-    meta_init.project.rc \
-    factory_init.rc \
-    factory_init.usb.rc \
-    factory_init.project.rc \
-    ueventd.mt6735.rc
+# Ramdisk
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,${LOCAL_PATH}/ramdisk,root)
 
 # Audio
 PRODUCT_PACKAGES += \
