@@ -35,49 +35,10 @@
 #include "log.h"
 #include "util.h"
 
-static int model_variant = -1;
-
-static void import_cmdline(char *name, int for_emulator)
-{
-    char *value = strchr(name, '=');
-    int name_len = strlen(name);
-
-    if (value == 0) return;
-    *value++ = 0;
-    if (name_len == 0) return;
-
-    if (!strcmp(name,"androidboot.cmv") && !strcmp(value,"pk1")) {
-        model_variant = 1;
-    }
-    if (!strcmp(name,"androidboot.cmv") && !strcmp(value,"pk2")) {
-        model_variant = 2;
-    }
-    if (!strcmp(name,"androidboot.cmv") && !strcmp(value,"pk3")) {
-        model_variant = 3;
-    }
-}
-
 void vendor_load_properties()
 {
-    import_kernel_cmdline(0, import_cmdline);
-
-    switch (model_variant) {
-        case 3:
-            property_set("ro.product.model", "Wileyfox Spark X");
-            property_set("dalvik.vm.heapgrowthlimit", "192m");
-            property_set("dalvik.vm.heapsize", "512m");
-            break;
-        case 2:
-            property_set("ro.product.model", "Wileyfox Spark +");
-            property_set("dalvik.vm.heapgrowthlimit", "192m");
-            property_set("dalvik.vm.heapsize", "512m");
-            break;
-        case 1:
-        default:
-            property_set("ro.product.model", "Wileyfox Spark");
+            property_set("ro.product.model", "XT1706");
             property_set("dalvik.vm.heapgrowthlimit", "128m");
             property_set("dalvik.vm.heapsize", "174m");
             property_set("ro.media.maxmem", "1073741824");
-            break;
-    }
 }

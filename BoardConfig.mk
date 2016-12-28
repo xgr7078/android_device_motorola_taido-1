@@ -13,46 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifneq ($(MTKPATH),)
--include $(MTKPATH)/BoardConfigVendor.mk
-endif
-
-
-TARGET_CYANOGEN_COMMON := mt6735
-
-COMMON_PATH := device/cyanogen/mt6735-common
-TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
+DEVICE_PATH := device/motorola/taido
+TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 TARGET_BOARD_PLATFORM ?= mt6735
 
 # Architecture
-ifeq ($(FORCE_32_BIT),true)
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
-else
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := cortex-a53
-
-TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
-TARGET_2ND_CPU_ABI := armeabi-v7a
-TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53
-endif
 
 BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Common properties
-TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
+TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
 # FSTAB
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/fstab.mt6735
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.mt6735
 
 # Audio
 USE_CUSTOM_AUDIO_POLICY := 1
@@ -63,22 +42,15 @@ TARGET_NO_BOOTLOADER := true
 
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-TARGET_KERNEL_SOURCE := kernel/cyanogen/mt6735
+TARGET_KERNEL_SOURCE := kernel/motorola/mt6735
 BOARD_KERNEL_BASE = 0x40000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET = 0x04000000
 BOARD_TAGS_OFFSET = 0xE000000
-ifeq ($(FORCE_32_BIT),true)
 TARGET_KERNEL_ARCH := arm
 BOARD_KERNEL_CMDLINE = bootopt=64S3,32N2,32N2
 BOARD_KERNEL_OFFSET = 0x00008000
-else
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-BOARD_KERNEL_CMDLINE = bootopt=64S3,32N2,64N2
-BOARD_KERNEL_OFFSET = 0x00080000
-TARGET_USES_64_BIT_BINDER := true
-endif
+
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET)
 
 # Bluetooth
@@ -88,7 +60,7 @@ BOARD_CONNECTIVITY_MODULE := conn_soc
 
 # CMHW
 BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
+BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/cmhw
 
 ifeq ($(HOST_OS),linux)
   ifeq ($(TARGET_BUILD_VARIANT),user)
@@ -121,13 +93,13 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/cyanogen/mt6735-common/ril
+BOARD_RIL_CLASS := ../../../device/motorola/taido/ril
 
 # Releasetools
-#TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)
+#TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # SELinux
-BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Wireless
 BOARD_WLAN_DEVICE := MediaTek
@@ -147,25 +119,22 @@ WIFI_DRIVER_STATE_OFF := 0
 # Misc
 EXTENDED_FONT_FOOTPRINT := true
 
-MTK_INTERNAL_CDEFS := $(foreach t,$(AUTO_ADD_GLOBAL_DEFINE_BY_NAME),$(if $(filter-out no NO none NONE false FALSE,$($(t))),-D$(t)))
-MTK_INTERNAL_CDEFS += $(foreach t,$(AUTO_ADD_GLOBAL_DEFINE_BY_VALUE),$(if $(filter-out no NO none NONE false FALSE,$($(t))),$(foreach v,$(shell echo $($(t)) | tr '[a-z]' '[A-Z]'),-D$(v))))
-MTK_INTERNAL_CDEFS += $(foreach t,$(AUTO_ADD_GLOBAL_DEFINE_BY_NAME_VALUE),$(if $(filter-out no NO none NONE false FALSE,$($(t))),-D$(t)=\"$($(t))\"))
+#MTK_INTERNAL_CDEFS := $(foreach t,$(AUTO_ADD_GLOBAL_DEFINE_BY_NAME),$(if $(filter-out no NO none NONE false FALSE,$($(t))),-D$(t)))
+#MTK_INTERNAL_CDEFS += $(foreach t,$(AUTO_ADD_GLOBAL_DEFINE_BY_VALUE),$(if $(filter-out no NO none NONE false FALSE,$($(t))),$(foreach v,$(shell echo $($(t)) | tr '[a-z]' '[A-Z]'),-D$(v))))
+#MTK_INTERNAL_CDEFS += $(foreach t,$(AUTO_ADD_GLOBAL_DEFINE_BY_NAME_VALUE),$(if $(filter-out no NO none NONE false FALSE,$($(t))),-D$(t)=\"$($(t))\"))
 
-COMMON_GLOBAL_CFLAGS += $(MTK_INTERNAL_CDEFS)
-COMMON_GLOBAL_CPPFLAGS += $(MTK_INTERNAL_CDEFS)
+#COMMON_GLOBAL_CFLAGS += $(MTK_INTERNAL_CDEFS)
+#COMMON_GLOBAL_CPPFLAGS += $(MTK_INTERNAL_CDEFS)
 
-TARGET_KERNEL_CONFIG := cyanogenmod_porridge_defconfig
+TARGET_KERNEL_CONFIG := taido_defconfig
 
-TARGET_BOOTLOADER_BOARD_NAME := PORRIDGE
+# Check it up YO !
+TARGET_BOOTLOADER_BOARD_NAME := TAIDO
 
 BOARD_SYSTEMIMAGE_PARTITION_SIZE:=2558525440
 BOARD_CACHEIMAGE_PARTITION_SIZE:=419430400
 BOARD_USERDATAIMAGE_PARTITION_SIZE:=4386701312
 
-TARGET_INIT_VENDOR_LIB := libinit_porridge
+TARGET_INIT_VENDOR_LIB := libinit_taido
 
 TARGET_TAP_TO_WAKE_NODE := /sys/devices/soc/soc:touch/enable_gesture
-
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy

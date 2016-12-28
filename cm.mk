@@ -12,21 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, device/wileyfox/porridge/full_porridge.mk)
+$(call inherit-product, device/motorola/taido/full_taido.mk)
 
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 
-PRODUCT_NAME := cm_porridge
-BOARD_VENDOR := wileyfox
-PRODUCT_DEVICE := porridge
+PRODUCT_NAME := cm_taido
+BOARD_VENDOR := motorola
+PRODUCT_DEVICE := taido
 
-PRODUCT_GMS_CLIENTID_BASE := android-wileyfox
+PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
-PRODUCT_MANUFACTURER := Wileyfox
-PRODUCT_MODEL := Wileyfox Spark
+PRODUCT_MANUFACTURER := Motorola
+PRODUCT_MODEL := Moto E3
 
-PRODUCT_BRAND := Wileyfox
-TARGET_VENDOR := wileyfox
-TARGET_VENDOR_PRODUCT_NAME := Spark
-TARGET_VENDOR_DEVICE_NAME := porridge
+PRODUCT_BRAND := Motorola
+TARGET_VENDOR := Motorola
+TARGET_VENDOR_PRODUCT_NAME := Moto E3
+TARGET_VENDOR_DEVICE_NAME := taido
