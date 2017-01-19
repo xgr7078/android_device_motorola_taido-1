@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 DEVICE_PATH := device/motorola/taido
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
-TARGET_BOARD_PLATFORM ?= mt6735
+TARGET_BOARD_PLATFORM ?= mt6735m
 
 # Architecture
 TARGET_ARCH := arm
@@ -41,13 +41,13 @@ TARGET_NO_BOOTLOADER := true
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_SOURCE := kernel/motorola/mt6735
-BOARD_KERNEL_BASE = 0x40000000
+BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_RAMDISK_OFFSET = 0x04000000
-BOARD_TAGS_OFFSET = 0xE000000
+BOARD_RAMDISK_OFFSET := 0x04000000
+BOARD_TAGS_OFFSET := 0xE000000
 TARGET_KERNEL_ARCH := arm
-BOARD_KERNEL_CMDLINE = bootopt=64S3,32N2,32N2
-BOARD_KERNEL_OFFSET = 0x00008000
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,32N2 androidboot.selinux=permissive
+BOARD_KERNEL_OFFSET := 0x00008000
 TARGET_KERNEL_CONFIG := cm_taido_defconfig
 
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET)
