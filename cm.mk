@@ -14,19 +14,11 @@
 
 $(call inherit-product, device/motorola/taido/full_taido.mk)
 
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
-
-
-PRODUCT_NAME := cm_taido
-BOARD_VENDOR := motorola
-PRODUCT_DEVICE := taido
-
 PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
-PRODUCT_MANUFACTURER := Motorola
-PRODUCT_MODEL := Moto E3
-
+## Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := taido
+PRODUCT_NAME := cm_taido
 PRODUCT_BRAND := Motorola
-TARGET_VENDOR := Motorola
-TARGET_VENDOR_PRODUCT_NAME := Moto E3
-TARGET_VENDOR_DEVICE_NAME := taido
+PRODUCT_MANUFACTURER := Motorola
+PRODUCT_RELEASE_NAME := taido
