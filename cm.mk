@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Inherit from taido device
 $(call inherit-product, device/motorola/taido/full_taido.mk)
 
+# Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
+
+# Call the proprietary setup
+$(call inherit-product-if-exists, vendor/motorola/taido/taido-vendor.mk)
 
 PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
