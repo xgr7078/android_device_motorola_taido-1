@@ -25,7 +25,7 @@ PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := taido
-PRODUCT_NAME := cm_taido
+PRODUCT_NAME := lineage_taido
 PRODUCT_BRAND := Motorola
 PRODUCT_MANUFACTURER := Motorola
 PRODUCT_RELEASE_NAME := taido
