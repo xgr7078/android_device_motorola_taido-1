@@ -18,6 +18,8 @@ TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 TARGET_BOARD_PLATFORM ?= mt6735m
 
+TARGET_OTA_ASSERT_DEVICE := taido,taido_row
+
 # Architecture
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
